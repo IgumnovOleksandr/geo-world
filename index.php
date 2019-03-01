@@ -13,6 +13,7 @@ $continents = Continent::getAllContinents();
 
 <section id="main">
   <div class="container">
+      <h2>Список континентів</h2>
     <div class="row">
       <?php foreach ($continents as $continentItem): ?>
       <div class="col-12 col-sm-6 col-md-4 mt-3">
