@@ -50,8 +50,10 @@ class Country {
         $result = $stmt->execute([$this->code, $this->countryName, $this->area, $this->currency, $this->coords, $this->capital, $this->iso3, $this->phoneNumber, $this->officialName, $this->continentCode, $this->displayOrder]);
         return $result;
     }
-    public static function getCountriesByContinent($continentCode) {
-        $sql = "SELECT * FROM `countries` WHERE continent_code=?";
+    public static function getCountriesByContinent($continentCode, $page) {
+        $n = ITEMS_ON_PAGE;
+        $start = ($page-1)*ITEMS_ON_PAGE;
+        $sql = "SELECT * FROM `countries` WHERE continent_code=? LIMIT $start, $n";
         $stmt = DB::$connection->prepare($sql);
         $stmt->execute([$continentCode]);
         return $stmt->fetchAll();

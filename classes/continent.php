@@ -11,7 +11,12 @@ class Continent{
         $this->name = $continent["name"];
         $this->description = $continent["description"];
     }
-
+    public function getCountCountries(){
+        $sql = "SELECT COUNT(*) AS qnt FROM `countries` WHERE continent_code=?";
+        $stmt = DB::$connection->prepare($sql);
+        $stmt->execute([$this->code]);
+        return $stmt->fetch();
+    }
     public static function getAllContinents(){
         $sql = "SELECT * FROM `continents`";
         $stmt = DB::$connection->prepare($sql);
